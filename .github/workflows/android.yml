@@ -6,7 +6,9 @@ on:
 permissions:
   contents: write
 jobs:
-  apk:
+  apk:    defaults:
+      run:
+        working-directory: terzme-app
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -17,7 +19,7 @@ jobs:
       - run: npm install
       - run: npx cap add android
       - run: npx cap sync android
-      - run: cd android && chmod +x gradlew && ./gradlew assembleDebug
+            - run: cd android && chmod +x gradlew && ./gradlew assembleDebug
       - uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
